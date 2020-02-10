@@ -1,0 +1,52 @@
+/*-- Use For Custom Styling --*/
+/* Colors
+petrol: #072938;
+light-petrol: #395e6f;
+aqua: #1A788C;
+purple: #6A1B3C;
+*/ 
+
+.btn-light-petrol {
+  background-color: #395e6f;
+  border-color: #395e6f;
+  color: #ffffff;
+}
+
+.loader {
+  background: #072938
+}
+
+@-webkit-keyframes LOADINGREV {
+  0% { -webkit-transform: scale(0.5); transform: scale(0.5); background: #ffffff; }
+  50% { -webkit-transform: scale(1); transform: scale(1); background: #072938; }
+  100% { -webkit-transform: scale(0.5); transform: scale(0.5); background: #ffffff; }
+}
+@keyframes LOADINGREV {
+  0% { -webkit-transform: scale(0.5); transform: scale(0.5); background: #ffffff; }
+  50% { -webkit-transform: scale(1); transform: scale(1); background: #072938; }
+  100% { -webkit-transform: scale(0.5); transform: scale(0.5); background: #ffffff; }
+}
+
+.navbar-top-default .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.rs-addon-beforeafter-after {
+  background: #072938;
+}
+
+.slide-2 .rs-addon-beforeafter-after {
+  background: #1A788C;
+}
+
+.slide-3 .rs-addon-beforeafter-after {
+  background: #6A1B3C;
+}
+
+.awaza .tp-count:before {
+  background: #072938;
+}
+
+.awaza .tp-bullet.selected .tp-count {
+  color: #072938;
+}
