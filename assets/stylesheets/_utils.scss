@@ -1,0 +1,46 @@
+@each $breakpoint in map-keys($mq-breakpoints) {
+  @include mq($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $mq-breakpoints);
+    .u-text#{$infix}--left {
+      text-align: left;
+    }
+
+    .u-text#{$infix}--right {
+      text-align: right;
+    }
+
+    .u-text#{$infix}--center {
+      text-align: center;
+    }
+  }
+}
+
+.u-text--hide {
+  border: 0;
+  background-color: transparent;
+  color: transparent;
+  font: 0 / 0 a;
+  font-size: 0.1px;
+  text-shadow: none;
+}
+
+.u-is-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.u-is-hidden--hard {
+  display: none;
+}
+
+.u-text--ellipsis {
+  @include text-ellipsis;
+}
+
+.u-overflow-hide {
+  overflow: hidden;
+}
+
+.u-flex--ie {
+  flex: 1 0 100%;
+}

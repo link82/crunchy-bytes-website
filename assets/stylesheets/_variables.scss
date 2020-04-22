@@ -1,0 +1,28 @@
+$mq-breakpoints: (
+  xs: 0px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+);
+
+$grid-gutter: 10px;
+
+//** Set font sizes desktop
+$font-size-base: 16px !default;
+$line-height-base: 1.222 !default;
+
+$color-teal: #1A788C;
+$color-purple: #6A1B3C;
+$color-yellow: #FF8A00;
+$color-dark: #00283A;
+$color-background: #FFFFFF;
+$color-placeholders: #C4C4C4;
+
+$color-primary: $color-teal !default;
+$color-text: $color-dark !default;
+
+$transition-timing: 350ms;
+
+$font-primary: 'Quicksand', sans-serif;

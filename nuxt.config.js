@@ -20,11 +20,19 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap' }
     ]
   },
   loading: { color: '#1A788C' },
-  css: [],
+  css: [ '@/assets/stylesheets/application.scss' ],
+  styleResources: {
+    scss: [
+      '~node_modules/sass-mq/_mq.scss',
+      '~/assets/stylesheets/_variables.scss',
+      '~/assets/stylesheets/_mixins.scss'
+    ]
+  },
   plugins: [
     { src: '~plugins/global-components.js' },
     { src: '~plugins/json-ld.js' },
@@ -35,11 +43,37 @@ export default {
     '@nuxtjs/eslint-module'
   ],
   modules: [
-    '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    [ 'storyblok-nuxt', {
+      accessToken: 'tL4pD9Wn6Qya9GZM6rB87gtt',
+      cacheProvider: 'memory'
+    } ],
+    [ 'nuxt-i18n', {
+      locales: [
+        {
+          code: 'it',
+          name: 'Italiano',
+          iso: 'it-IT',
+          file: 'it.js'
+        },
+        {
+          code: 'en',
+          name: 'English',
+          iso: 'en-EN',
+          file: 'en.js'
+        }
+      ],
+      lazy: true,
+      langDir: 'lang/',
+      seo: false,
+      vuex: false,
+      strategy: 'prefix_except_default',
+      detectBrowserLanguage: false,
+      defaultLocale: 'it'
+    } ],
     '@nuxtjs/pwa',
     'nuxt-purgecss'
   ],
-  axios: {},
   purgeCSS: {},
   render: {
     http2: {

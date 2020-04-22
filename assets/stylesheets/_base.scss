@@ -1,0 +1,293 @@
+/* ==========================================================================
+Base Styles
+========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+*:focus {
+  outline: $color-primary auto 0;
+  outline-offset: -2px;
+}
+
+@at-root {
+  @-ms-viewport { width: device-width; }
+}
+
+html, body {
+  &.o-h {
+    overflow: hidden;
+  }
+
+  &[data-whatinput="mouse"],
+  &[data-whatinput="touch"] {
+    * {
+      outline: none!important;
+    }
+  }
+}
+
+html,
+button,
+input,
+select,
+textarea {
+  color: $color-text;
+}
+
+html,
+body {
+  line-height: 1.33333333;
+  height: 100%;
+}
+
+html {
+  font-size: percentage($font-size-base / 16px);
+}
+
+body {
+  margin: 0;
+  font-family: $font-primary;
+  color: $color-text;
+  background-color: $color-background;
+  overflow-anchor: none;
+}
+
+// Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+
+audio,
+canvas,
+iframe,
+svg,
+video,
+img {
+  vertical-align: middle;
+}
+
+svg {
+  width: 100%;
+}
+
+main, aside, article, header, footer, section {
+  display: block;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  border: none;
+}
+
+// Remove text-shadow in selection highlight: h5bp.com/i
+// These selection declarations have to be separate.
+// Customize the background color to match your design.
+
+::-moz-selection {
+  background-color: rgba($color-primary, 0.2);
+  text-shadow: none;
+}
+
+::selection {
+  background-color: rgba($color-primary, 0.2);
+  text-shadow: none;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: $color-background;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: $color-primary;
+  transition: background-color $transition-timing;
+
+  &:hover {
+    background-color: mix($color-dark, $color-primary, 10%);
+  }
+
+  &:active {
+    background-color: mix($color-dark, $color-primary, 20%);
+  }
+}
+
+a {
+  display: inline-block;
+  position: relative;
+  color: $color-primary;
+  text-decoration: none;
+  transition: color $transition-timing;
+
+  &:hover {
+    // set to important so that hover is hardly overwritten by other styles
+    // color: $color-link-hover !important; // scss-lint:disable ImportantRule
+    text-decoration: none;
+  }
+}
+
+// %special-link {
+//   &::before {
+//     content: '';
+//     height: 1px;
+//     width: 0%;
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     background-color: $color-primary;
+//     transform-origin: 0 0;
+//     transition: all 0.2s;
+//   }
+
+//   &:hover {
+//     &::before {
+//       width: 100%;
+//     }
+//   }
+// }
+
+// a:not([class]), {
+//   @extend %special-link;
+// }
+
+
+a,
+button,
+input,
+select {
+  /* remove outline, but set again on aria-focus */
+  outline: none;
+  -webkit-appearance: none;
+
+  @include aria-focus {
+    outline: dotted 1px $color-primary;
+  }
+}
+
+
+// prevent 300ms delay in FF, Chrome and IE on touch devices
+a[href], button {
+  touch-action: manipulation;
+}
+
+button, [type='button'] {
+  background: none;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  appearance: none;
+  cursor: pointer;
+  -webkit-user-select: none ;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input:invalid,
+input:required {
+  box-shadow: none;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+input::-webkit-search-cancel-button {
+  display: none;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+// Allow only vertical resizing of textareas.
+
+textarea {
+  resize: vertical;
+}
+
+address {
+  font-style: normal;
+}
+
+@for $i from 1 to 7 {
+  h#{$i} {
+    margin: 0;
+  }
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+@include placeholder {
+  color: $color-placeholders;
+  opacity: 1;
+}
+
+.grecaptcha-badge {
+  display: none;
+}
+
+/* ==========================================================================
+   ## CSS to JS Breakpoint Bridge - REQUIRES _mq.scss TO BE IMPORTED
+   ========================================================================== */
+body::after,
+body::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+}
+
+body::after {
+  content: 'xs';
+
+  @each $mq-key, $mq-value in $mq-breakpoints {
+    @include mq($mq-key) {
+      content: '#{$mq-key}';
+    }
+  }
+}
+
+body::before {
+  $values: '' !default;
+
+  @each $mq-key, $mq-value in $mq-breakpoints {
+    $values: $values + '"#{$mq-key}": "#{$mq-value}",';
+  }
+
+  $values: str-slice($values, 0, str-length($values) - 1);
+
+  content: '{#{$values}}';
+}
