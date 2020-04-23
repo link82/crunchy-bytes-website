@@ -1,5 +1,10 @@
 .l-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  column-gap: $gutter;
+  column-gap: $grid-gutter;
+}
+
+.l-container {
+  padding-left: 40px;
+  padding-right: 40px;
 }

@@ -22,6 +22,7 @@ module.exports = {
       'error',
       'always'
     ],
+    'template-curly-spacing' : 'off',
     'no-console': 'off',
     'no-unused-vars': 'warn',
     'eqeqeq': 'off',
@@ -50,7 +51,7 @@ module.exports = {
         'vue/script-indent': [
           'warn',
           2,
-          { 'baseIndent': 1 }
+          { 'baseIndent': 1, 'switchCase': 1 }
         ]
       }
     }

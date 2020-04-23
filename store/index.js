@@ -1,6 +1,7 @@
 export const state = () => ({
   isReady: false,
   isCrawler: false,
+  isMenuOpen: false,
   version: null,
   cacheVersion: '',
   settings: null
@@ -12,6 +13,9 @@ export const mutations = {
   },
   setIsCrawler (state, value) {
     state.isCrawler = value
+  },
+  setMenuOpen (state, value) {
+    state.isMenuOpen = value
   },
   setVersion (state, version) {
     state.version = version

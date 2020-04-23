@@ -16,12 +16,14 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/style-resources": "^1.0.0",
     "intersection-observer": "^0.9.0",
+    "lodash.capitalize": "^4.2.1",
     "nuxt": "^2.0.0",
-    "nuxt-i18n": "^6.9.2",
+    "nuxt-i18n": "^6.9.3",
     "nuxt-jsonld": "^1.4.8",
     "nuxt-purgecss": "^0.2.1",
     "sass-mq": "^5.0.1",
     "storyblok-nuxt": "^1.2.0",
+    "vue-types": "^1.7.0",
     "what-input": "^5.2.7"
   },
   "devDependencies": {
