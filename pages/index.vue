@@ -53,5 +53,9 @@
     height: 100%;
     background-color: $color-primary;
     z-index: -1;
+
+    @include mq($until: lg) {
+      display: none;
+    }
   }
 </style>

@@ -1,18 +1,14 @@
 <template>
-  <picture v-if="webp">
+  <picture>
     <source
       :srcset="webpSource"
       type="image/webp">
     <img
       :src="img.image"
       :alt="img.image_alt"
-      :title="img.caption">
+      :title="img.caption"
+      class="image">
   </picture>
-  <img
-    v-else
-    :src="img.image"
-    :alt="img.image_alt"
-    :title="img.caption">
 </template>
 
 <script>
@@ -21,7 +17,7 @@
   export default {
     props: {
       img: VueTypes.object,
-      webp: VueTypes.bool.def(true)
+      full: VueTypes.bool.def(false)
     },
     computed: {
       path () {

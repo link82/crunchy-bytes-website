@@ -49,5 +49,9 @@
     margin: 0;
     margin-bottom: 20px;
     font-weight: 300;
+
+    @include mq($until: lg) {
+      display: none;
+    }
   }
 </style>

@@ -2,7 +2,7 @@ export const state = () => ({
   isReady: false,
   isCrawler: false,
   isMenuOpen: false,
-  logoLight: false,
+  logoLight: true,
   logoSmall: false,
   version: null,
   cacheVersion: '',

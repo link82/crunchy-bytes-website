@@ -45,7 +45,7 @@
   .heading {
     position: relative;
     margin: 0;
-    line-height: 1.4725;
+    line-height: 1.2725;
     font-weight: bold;
   }
 

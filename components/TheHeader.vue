@@ -40,11 +40,16 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100px;
+    height: $header-height;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 1;
+
+    @include mq($until: lg) {
+      height: $header-height-mobile;
+      background-color: $color-green;
+    }
   }
 
   .header__logo {

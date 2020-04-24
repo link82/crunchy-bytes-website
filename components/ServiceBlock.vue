@@ -3,9 +3,7 @@
     class="service-block"
     :class="{ 'service-block--r': isOdd }">
     <div class="service-block__text">
-      <heading
-        size="xl"
-        light>
+      <heading size="xl">
         {{ title }}
       </heading>
       <rich-text :content="description" />
@@ -44,15 +42,31 @@
     align-items: center;
     padding-left: 150px;
     padding-right: 150px;
-  }
 
+    @include mq($until: lg) {
+      padding-left: 20px;
+      padding-right: 20px;
+      flex-wrap: wrap;
+    }
+  }
   .service-block--r {
     flex-direction: row-reverse;
+
+    > .service-block__text {
+      padding-left: 40px;
+      padding-right: 0px
+    }
   }
 
   .service-block__text,
   .service-block__img {
     flex: 0 0 50%;
+  }
+
+  .service-block__text {
+    color: $color-black;
+    font-weight: 300;
+    padding-right: 40px
   }
 
 </style>

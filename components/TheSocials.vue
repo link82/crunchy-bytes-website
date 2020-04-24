@@ -34,9 +34,14 @@
 
 <style lang="scss">
   .socials {
+    display: none;
     position: absolute;
     bottom: 55px;
     left: 40px;
+
+    @include mq(lg) {
+      display: block;
+    }
   }
 
   .socials__list {
