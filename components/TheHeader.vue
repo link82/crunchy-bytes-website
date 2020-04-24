@@ -1,6 +1,9 @@
 <template>
   <header class="header l-container">
-    <logo class="header__logo" />
+    <logo
+      :light="logoLight"
+      :small="logoSmall"
+      class="header__logo" />
     <hamburger
       class="header__burger"
       @click="toggleMenu" />
@@ -19,7 +22,9 @@
     },
     computed: {
       ...mapState([
-        'isMenuOpen'
+        'isMenuOpen',
+        'logoLight',
+        'logoSmall'
       ])
     },
     methods: {

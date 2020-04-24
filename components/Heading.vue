@@ -62,14 +62,14 @@
   }
 
   .heading--m {
-    font-size: 52px;
+    font-size: 36px;
   }
 
   .heading--s {
-    font-size: 48px;
+    font-size: 24px;
   }
 
   .heading--xs {
-    font-size: 40px;
+    font-size: 22px;
   }
 </style>

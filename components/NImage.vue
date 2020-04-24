@@ -25,7 +25,7 @@
     },
     computed: {
       path () {
-        return this.img.image.split('a.storyblok.com')[1]
+        return this.img?.image?.split('a.storyblok.com')[1]
       },
       webpSource () {
         return `//img2.storyblok.com/filters:format(webp)${this.path}`

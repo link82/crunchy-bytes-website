@@ -1,31 +1,28 @@
 <template>
   <div class="page page-home">
-    <div class="page-home__head">
-      <div class="page-home__head-text">
-        <heading size="xl">
-          {{ story.content.title }}
-        </heading>
-        <rich-text :content="story.content.abstract" />
-      </div>
-      <n-image
-        :img="story.content.image"
-        class="page-home__head-img" />
-    </div>
-    <!-- <dynamic-component
-      v-for="block in story.content.blocks"
+    <page-head
+      :title="story.content.title"
+      :abstract="story.content.abstract"
+      :image="story.content.image"
+      :quick-links="story.content.quicklinks" />
+    <dynamic-component
+      v-for="(block, i) in story.content.blocks"
       :key="block._uid"
-      :block="block" /> -->
+      :index="i"
+      :block="block" />
     <div class="page__stripe" />
   </div>
 </template>
 
 <script>
   import BridgeMixin from '@/mixins/storybridge'
-  // import DynamicComponent from '@/components/DynamicComponent'
+  import DynamicComponent from '@/components/DynamicComponent'
+  import PageHead from '@/components/PageHead'
 
   export default {
     components: {
-      // DynamicComponent
+      DynamicComponent,
+      PageHead
     },
     mixins: [ BridgeMixin ],
     async asyncData ({ app, error, store }) {
@@ -48,31 +45,6 @@
 </script>
 
 <style lang="scss">
-  .page-home__head {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    z-index: 0;
-  }
-
-  .page-home__head-text {
-    width: 50%;
-    padding-left: 50px;
-    padding-right: 50px;
-    color: $color-background;
-  }
-
-  .page-home__head-img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 70%;
-    z-index: -1;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
   .page__stripe {
     position: fixed;
     top: 0;

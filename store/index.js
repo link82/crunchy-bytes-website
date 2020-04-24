@@ -2,6 +2,8 @@ export const state = () => ({
   isReady: false,
   isCrawler: false,
   isMenuOpen: false,
+  logoLight: false,
+  logoSmall: false,
   version: null,
   cacheVersion: '',
   settings: null
@@ -16,6 +18,12 @@ export const mutations = {
   },
   setMenuOpen (state, value) {
     state.isMenuOpen = value
+  },
+  setLogoLight (state, value) {
+    state.logoLight = value
+  },
+  setLogoSmall (state, value) {
+    state.logoSmall = value
   },
   setVersion (state, version) {
     state.version = version

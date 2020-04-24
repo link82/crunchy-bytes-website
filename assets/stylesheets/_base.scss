@@ -184,6 +184,12 @@ a[href], button {
   touch-action: manipulation;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 button, [type='button'] {
   background: none;
   padding: 0;
