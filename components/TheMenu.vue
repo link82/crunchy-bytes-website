@@ -1,30 +1,39 @@
 <template>
-  <transition
-    name="clip"
-    @after-enter="handleEnter"
-    @before-leave="handleLeave">
+  <swipe>
     <aside class="menu">
-      <ul class="menu__list">
-        <li
-          v-for="link in settings.navigation"
-          :key="link._uid">
-          <menu-item
-            :to="link.url"
-            :label="link.label"
-            :image="link.image" />
-        </li>
-      </ul>
+      <div
+        data-anim-content
+        class="menu__content">
+        <ul class="menu__list">
+          <li
+            v-for="link in settings.navigation"
+            :key="link._uid">
+            <menu-item
+              :to="link.url"
+              :label="link.label"
+              :image="link.image" />
+          </li>
+        </ul>
+        <the-socials />
+      </div>
+      <div
+        data-anim-color
+        class="menu__swipe" />
     </aside>
-  </transition>
+  </swipe>
 </template>
 
 <script>
   import { mapState } from 'vuex'
   import MenuItem from '@/components/MenuItem'
+  import TheSocials from '@/components/TheSocials'
+  import Swipe from '@/components/transitions/Swipe'
 
   export default {
     components: {
-      MenuItem
+      MenuItem,
+      TheSocials,
+      Swipe
     },
     data () {
       return {
@@ -35,14 +44,6 @@
       ...mapState([
         'settings'
       ])
-    },
-    methods: {
-      handleEnter () {
-        this.itemsVisible = true
-      },
-      handleLeave () {
-        this.itemsVisible = false
-      }
     }
   }
 </script>
@@ -54,17 +55,26 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $color-primary;
-    transition: clip-path 2s;
-    clip-path: polygon(50% -100%, -100% 200%, 200% 200%);
+  }
+
+  .menu__content {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    width: 100%;
+    height: 100%;
     padding: 100px;
+    background-color: $color-primary;
   }
 
-  .clip-enter,
-  .clip-leave-to {
-    clip-path: polygon(90% 5%, 85% 10%, 95% 10%);
+  .menu__swipe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $color-purple;
+    visibility: hidden;
   }
+
 </style>

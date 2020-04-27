@@ -8,6 +8,8 @@
     <n-image
       v-if="image"
       :img="{ image }"
+      :width="300"
+      :height="300"
       class="menu-item__image" />
   </link-wrapper>
 </template>
@@ -21,7 +23,7 @@
       image: VueTypes.string,
       label: VueTypes.string
     },
-    computed: {
+    methods: {
     }
   }
 </script>

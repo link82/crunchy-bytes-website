@@ -1,16 +1,23 @@
 <template>
   <div class="page page-home">
     <page-head
-      :title="story.content.title"
-      :abstract="story.content.abstract"
+      home
       :image="story.content.image"
-      :quick-links="story.content.quicklinks" />
+      :boxes="story.content.boxes">
+      <template v-slot:content>
+        <heading size="xl">
+          {{ story.content.title }}
+        </heading>
+        <rich-text
+          :content="story.content.abstract"
+          class="page__abstract" />
+      </template>
+    </page-head>
     <dynamic-component
       v-for="(block, i) in story.content.blocks"
       :key="block._uid"
       :index="i"
       :block="block" />
-    <div class="page__stripe" />
   </div>
 </template>
 
@@ -45,14 +52,8 @@
 </script>
 
 <style lang="scss">
-  .page__stripe {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 100%;
-    background-color: $color-primary;
-    z-index: -1;
+  .page__abstract {
+    width: 60%;
 
     @include mq($until: lg) {
       display: none;

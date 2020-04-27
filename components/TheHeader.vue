@@ -5,6 +5,7 @@
       :small="logoSmall"
       class="header__logo" />
     <hamburger
+      :light="isMenuOpen"
       class="header__burger"
       @click="toggleMenu" />
   </header>
@@ -44,12 +45,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: $color-text;
     z-index: 1;
 
     @include mq($until: lg) {
       height: $header-height-mobile;
       background-color: $color-green;
     }
+  }
+
+  .header--light {
+    color: $color-background;
   }
 
   .header__logo {

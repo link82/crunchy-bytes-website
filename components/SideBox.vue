@@ -1,7 +1,7 @@
 <template>
-  <link-wrapper
+  <component
+    :is="type"
     :to="link"
-    :title="title"
     class="quick-link"
     :class="{ 'quick-link--light': light }">
     <heading
@@ -9,11 +9,11 @@
       class="quick-link__title">
       {{ title }}
     </heading>
-    <p class="quick-link__abstract">
-      {{ abstract }}
-    </p>
-    <arrow />
-  </link-wrapper>
+    <rich-text
+      :content="abstract"
+      class="quick-link__abstract" />
+    <arrow v-if="link.id" />
+  </component>
 </template>
 
 <script>
@@ -22,9 +22,14 @@
   export default {
     props: {
       title: VueTypes.string,
-      abstract: VueTypes.string,
-      link: VueTypes.object.isRequired,
+      abstract: VueTypes.object,
+      link: VueTypes.object,
       light: VueTypes.bool.def(false)
+    },
+    computed: {
+      type () {
+        return !!this.link && !!this.link.id ? 'link-wrapper' : 'div'
+      }
     }
   }
 </script>
