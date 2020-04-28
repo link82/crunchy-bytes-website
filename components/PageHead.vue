@@ -18,9 +18,11 @@
         v-for="(l, i) in boxes"
         :key="l._uid"
         :title="l.title"
+        :big-title="l.bigTitle"
         :abstract="l.abstract"
         :link="l.link"
         :light="i % 2 !== 0" />
+      <slot name="boxes" />
     </aside>
   </div>
 </template>
@@ -102,7 +104,7 @@
 
     @include mq(lg) {
       position: absolute;
-      width: 70%;
+      width: 66.6666%;
       height: 650px;
       top: 50%;
       right: 0;

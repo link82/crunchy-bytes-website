@@ -3,9 +3,9 @@
     class="service-block"
     :class="{ 'service-block--r': isOdd }">
     <div class="service-block__text">
-      <heading size="xl">
-        {{ title }}
-      </heading>
+      <heading
+        size="l"
+        :rich-text="title" />
       <rich-text :content="description" />
     </div>
     <n-image
@@ -19,7 +19,7 @@
 
   export default {
     props: {
-      title: VueTypes.string,
+      title: VueTypes.object,
       description: VueTypes.object,
       image: VueTypes.object,
       index: VueTypes.oneOfType([

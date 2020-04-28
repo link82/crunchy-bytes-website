@@ -4,15 +4,13 @@
     :to="link"
     class="quick-link"
     :class="{ 'quick-link--light': light }">
-    <slot>
-      <heading
-        :size="titleSize"
-        class="quick-link__title"
-        :rich-text="title" />
-      <rich-text
-        :content="abstract"
-        class="quick-link__abstract" />
-    </slot>
+    <heading
+      :size="titleSize"
+      class="quick-link__title"
+      :rich-text="title" />
+    <rich-text
+      :content="abstract"
+      class="quick-link__abstract" />
     <arrow v-if="link.id" />
   </component>
 </template>

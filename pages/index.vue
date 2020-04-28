@@ -5,9 +5,9 @@
       :image="story.content.image"
       :boxes="story.content.boxes">
       <template v-slot:content>
-        <heading size="xl">
-          {{ story.content.title }}
-        </heading>
+        <heading
+          size="xl"
+          :rich-text="story.content.title" />
         <rich-text
           :content="story.content.abstract"
           class="page__abstract" />
@@ -33,8 +33,9 @@
     },
     mixins: [ BridgeMixin ],
     async asyncData ({ app, error, store }) {
+      store.commit('setStripeColor', '#1A788C')
       try {
-        const { data } = await app.$storyapi.get('cdn/stories/home', {
+        const { data } = await app.$storyapi.get('cdn/stories/index', {
           version: store.state.version
         })
         return data

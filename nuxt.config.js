@@ -21,7 +21,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap' }
     ]
   },
   loading: { color: '#1A788C' },
@@ -37,6 +37,7 @@ export default {
     { src: '~plugins/global-components.js' },
     { src: '~plugins/global-functions.js' },
     { src: '~plugins/json-ld.js' },
+    { src: '~plugins/validation.js' },
     { src: '~plugins/polyfills.js', mode: 'client' },
     { src: '~plugins/what-input.js', mode: 'client' }
   ],
@@ -89,6 +90,9 @@ export default {
         '@babel/plugin-proposal-optional-chaining'
       ]
     },
+    transpile: [
+      'vee-validate/dist/rules'
+    ],
     terser: {
       parallel: true,
       cache: false,

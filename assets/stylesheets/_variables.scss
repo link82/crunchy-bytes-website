@@ -22,11 +22,12 @@ $color-green: #134D59;
 $color-yellow: #FF8A00;
 $color-dark: #00283A;
 $color-black: #000000;
-$color-background: #FFFFFF;
+$color-light: #FFFFFF;
 $color-placeholders: #C4C4C4;
 
 $color-primary: $color-teal !default;
 $color-text: $color-dark !default;
+$color-background: $color-light !default;
 
 $transition-timing: 350ms;
 

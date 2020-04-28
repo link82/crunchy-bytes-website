@@ -4,6 +4,9 @@ export const state = () => ({
   isMenuOpen: false,
   logoLight: true,
   logoSmall: false,
+  stripeSmall: false,
+  stripeRight: false,
+  stripeColor: null,
   version: null,
   cacheVersion: '',
   settings: null
@@ -24,6 +27,15 @@ export const mutations = {
   },
   setLogoSmall (state, value) {
     state.logoSmall = value
+  },
+  setStripeSmall (state, value) {
+    state.stripeSmall = value
+  },
+  setStripeRight (state, value) {
+    state.stripeRight = value
+  },
+  setStripeColor (state, value) {
+    state.stripeColor = value
   },
   setVersion (state, version) {
     state.version = version

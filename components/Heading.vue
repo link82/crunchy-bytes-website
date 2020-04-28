@@ -3,10 +3,12 @@
     :is="tagname"
     class="heading"
     :class="[
-      `heading--${size}`,
-      { 'heading--light': light }
+      `heading--${size}`
     ]">
-    <slot />
+    <span
+      v-if="rich"
+      v-html="rich" />
+    <slot v-else />
   </component>
 </template>
 
@@ -17,7 +19,7 @@
     props: {
       tag: VueTypes.string,
       size: VueTypes.oneOf([ 'xl', 'l', 'm', 's', 'xs' ]).def('m'),
-      light: VueTypes.bool.def(false)
+      richText: VueTypes.object
     },
     computed: {
       /* eslint-ignore */
@@ -36,6 +38,11 @@
           default:
             return 'h3'
         }
+      },
+      rich () {
+        if (Object.keys(this.richText).length === 0) { return null }
+
+        return this.$storyapi.richTextResolver.render(this.richText).replace(/^<p[^>]*>|<\/p>$/g, '')
       }
     }
   }
@@ -46,11 +53,8 @@
     position: relative;
     margin: 0;
     line-height: 1.2725;
-    font-weight: bold;
-  }
-
-  .heading--light {
-    color: $color-background;
+    font-weight: 300;
+    color: currentColor;
   }
 
   .heading--xl {

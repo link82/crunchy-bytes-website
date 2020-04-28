@@ -3,7 +3,10 @@
     <the-header />
     <nuxt />
     <the-menu v-show="isMenuOpen" />
-    <the-stripe />
+    <the-stripe
+      :color="stripeColor"
+      :small="stripeSmall"
+      :right="stripeRight" />
     <the-footer />
   </main>
 </template>
@@ -24,7 +27,10 @@
     },
     computed: {
       ...mapState([
-        'isMenuOpen'
+        'isMenuOpen',
+        'stripeSmall',
+        'stripeRight',
+        'stripeColor'
       ])
     }
   }

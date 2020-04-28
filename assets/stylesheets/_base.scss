@@ -46,6 +46,7 @@ html,
 body {
   line-height: 1.33333333;
   height: 100%;
+  font-weight: 500;
 }
 
 html {
@@ -168,10 +169,12 @@ a {
 a,
 button,
 input,
-select {
+select,
+textarea {
   /* remove outline, but set again on aria-focus */
   outline: none;
   -webkit-appearance: none;
+  font-family: inherit;
 
   @include aria-focus {
     outline: dotted 1px $color-primary;

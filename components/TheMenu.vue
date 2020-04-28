@@ -1,10 +1,22 @@
 <template>
-  <swipe>
+  <transition
+    mode="out-in"
+    :css="false"
+    @before-enter="beforeEnter"
+    @enter="handleEnter"
+    @after-enter="cleanup"
+    @before-leave="beforeLeave"
+    @leave="handleLeave"
+    @after-leave="cleanup"
+    @enter-cancelled="cancel"
+    @leave-cancelled="cancel">
     <aside class="menu">
       <div
         data-anim-content
         class="menu__content">
-        <ul class="menu__list">
+        <ul
+          data-anim-list
+          class="menu__list">
           <li
             v-for="link in settings.navigation"
             :key="link._uid">
@@ -14,26 +26,25 @@
               :image="link.image" />
           </li>
         </ul>
-        <the-socials />
+        <the-socials data-anim-socials />
       </div>
       <div
         data-anim-color
         class="menu__swipe" />
     </aside>
-  </swipe>
+  </transition>
 </template>
 
 <script>
   import { mapState } from 'vuex'
+  import gsap from 'gsap'
   import MenuItem from '@/components/MenuItem'
   import TheSocials from '@/components/TheSocials'
-  import Swipe from '@/components/transitions/Swipe'
 
   export default {
     components: {
       MenuItem,
-      TheSocials,
-      Swipe
+      TheSocials
     },
     data () {
       return {
@@ -44,6 +55,125 @@
       ...mapState([
         'settings'
       ])
+    },
+    created () {
+      this.timeline = null
+    },
+    methods: {
+      beforeEnter (el) {
+        if (!this.timeline) {
+          const s = el.querySelector('[data-anim-color]')
+          const c = el.querySelector('[data-anim-content]')
+
+          gsap.set(s, {
+            xPercent: 100,
+            visibility: 'visible'
+          })
+
+          gsap.set(c, {
+            visibility: 'hidden'
+          })
+        }
+      },
+      handleEnter (el, done) {
+        if (!this.timeline) {
+          const s = el.querySelector('[data-anim-color]')
+          const c = el.querySelector('[data-anim-content]')
+          const i = el.querySelectorAll('[data-anim-list] li')
+          const ss = el.querySelectorAll('[data-anim-socials]')
+
+          this.timeline = gsap
+            .timeline({ onComplete: done })
+            .to(s, 1.5, {
+              xPercent: -100,
+              ease: 'power1.inOut'
+            })
+            .set(c, {
+              visibility: 'visible'
+            }, '-=0.75')
+            .from(i, 0.5, {
+              x: 15,
+              opacity: 0,
+              stagger: 0.1
+            }, 'lists-=0.25')
+            .from(ss, 0.5, {
+              x: -15,
+              opacity: 0
+            }, 'lists-=0.25')
+            .add(() => {
+              this.$emit('enter')
+            })
+        } else if (this.timeline.reversed()) {
+          this.timeline.eventCallback('onComplete', done)
+          this.timeline.play()
+        } else {
+          this.timeline.eventCallback('onReverseComplete', done)
+          this.timeline.reverse()
+        }
+      },
+      beforeLeave (el) {
+        if (!this.timeline) {
+          const s = el.querySelector('[data-anim-color]')
+
+          gsap.set(s, {
+            xPercent: -100,
+            visibility: 'visible'
+          })
+        }
+      },
+      handleLeave (el, done) {
+        if (!this.timeline) {
+          const s = el.querySelector('[data-anim-color]')
+          const c = el.querySelector('[data-anim-content]')
+          const i = el.querySelectorAll('[data-anim-list] li')
+          const ss = el.querySelectorAll('[data-anim-socials]')
+
+          this.itemsVisible = false
+
+          this.timeline = gsap
+            .timeline({ onComplete: done })
+            .to(i, 0.5, {
+              x: 15,
+              opacity: 0,
+              stagger: 0.1
+            }, 'lists')
+            .to(ss, 0.5, {
+              x: -15,
+              opacity: 0
+            }, 'lists')
+            .to(s, 1.5, {
+              xPercent: 100,
+              ease: 'power1.inOut'
+            }, '-=0.25')
+            .set(c, {
+              visibility: 'hidden'
+            }, '-=0.75')
+            .add(() => {
+              this.$emit('leave')
+            })
+        } else if (this.timeline.reversed()) {
+          this.timeline.eventCallback('onComplete', done)
+          this.timeline.play()
+        } else {
+          this.timeline.eventCallback('onReverseComplete', done)
+          this.timeline.reverse()
+        }
+      },
+      cleanup (el) {
+        const s = el.querySelector('[data-anim-color]')
+        const c = el.querySelector('[data-anim-content]')
+        const i = el.querySelectorAll('[data-anim-list] li')
+        const ss = el.querySelectorAll('[data-anim-socials]')
+
+        this.timeline = null
+
+        gsap.set([ s, c, i, ss ], {
+          clearProps: 'all'
+        })
+      },
+      cancel () {
+        this.timeline.pause()
+      }
     }
   }
 </script>

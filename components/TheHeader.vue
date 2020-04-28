@@ -1,9 +1,12 @@
 <template>
   <header class="header l-container">
-    <logo
-      :light="logoLight"
-      :small="logoSmall"
-      class="header__logo" />
+    <nuxt-link
+      :to="localePath({ name: 'index' })">
+      <logo
+        :light="logoLight"
+        :small="logoSmall"
+        class="header__logo" />
+    </nuxt-link>
     <hamburger
       :light="isMenuOpen"
       class="header__burger"

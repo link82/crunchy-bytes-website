@@ -132,7 +132,7 @@
 //
 // ==========================================================================
 
-@function em($pixels, $context: $font-size-default) {
+@function em($pixels, $context: $font-size-base) {
   @if (unitless($pixels)) {
       $pixels: $pixels * 1px;
   }
@@ -147,7 +147,7 @@
   @if (unitless($pixels)) {
       $pixels: $pixels * 1px;
   }
-  @return #{$pixels / $font-size-default}rem;
+  @return #{$pixels / $font-size-base}rem;
 }
 
 @mixin text-ellipsis() {
