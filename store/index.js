@@ -5,6 +5,7 @@ export const state = () => ({
   isMenuOpen: false,
   logoLight: true,
   logoSmall: false,
+  headerSolid: false,
   stripeSmall: false,
   stripeRight: false,
   stripeColor: null,
@@ -31,6 +32,9 @@ export const mutations = {
   },
   setLogoSmall (state, value) {
     state.logoSmall = value
+  },
+  setHeaderSolid (state, value) {
+    state.headerSolid = value
   },
   setStripeSmall (state, value) {
     state.stripeSmall = value

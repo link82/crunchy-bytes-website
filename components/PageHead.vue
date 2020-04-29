@@ -136,7 +136,7 @@
     margin-bottom: 40px;
     z-index: -1;
 
-    > img {
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;

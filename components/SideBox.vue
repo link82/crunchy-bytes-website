@@ -44,9 +44,16 @@
 
 <style lang="scss">
   .quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 30px;
     background-color: $color-green;
     color: $color-background;
+
+    @include mq($until: lg) {
+      justify-content: space-between;
+    }
   }
 
   .quick-link--light {

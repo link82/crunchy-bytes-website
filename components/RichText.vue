@@ -1,5 +1,7 @@
 <template>
-  <div v-html="resolvedText" />
+  <div
+    class="rich-text"
+    v-html="resolvedText" />
 </template>
 
 <script>
@@ -16,3 +18,11 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .rich-text {
+    > p {
+      margin: 0;
+    }
+  }
+</style>

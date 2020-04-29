@@ -58,22 +58,42 @@
   }
 
   .heading--xl {
-    font-size: 64px;
+    font-size: 42px;
+
+    @include mq(lg) {
+      font-size: 64px;
+    }
   }
 
   .heading--l {
-    font-size: 60px;
+    font-size: 36px;
+
+    @include mq(lg) {
+      font-size: 60px;
+    }
   }
 
   .heading--m {
-    font-size: 36px;
+    font-size: 26px;
+
+    @include mq(lg) {
+      font-size: 36px;
+    }
   }
 
   .heading--s {
-    font-size: 24px;
+    font-size: 20px;
+
+    @include mq(lg) {
+      font-size: 24px;
+    }
   }
 
   .heading--xs {
-    font-size: 22px;
+    font-size: 18px;
+
+    @include mq(lg) {
+      font-size: 22px;
+    }
   }
 </style>

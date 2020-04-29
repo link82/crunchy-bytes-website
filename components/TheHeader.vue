@@ -1,5 +1,7 @@
 <template>
-  <header class="header l-container">
+  <header
+    class="header l-container"
+    :class="{ 'header--solid' : headerSolid }">
     <nuxt-link
       :to="localePath({ name: 'index' })">
       <logo
@@ -28,7 +30,8 @@
       ...mapState([
         'isMenuOpen',
         'logoLight',
-        'logoSmall'
+        'logoSmall',
+        'headerSolid'
       ])
     },
     methods: {
@@ -53,8 +56,11 @@
 
     @include mq($until: lg) {
       height: $header-height-mobile;
-      background-color: $color-green;
     }
+  }
+
+  .header--solid {
+    background-color: $color-green;
   }
 
   .header--light {

@@ -1,14 +1,21 @@
 <template>
-  <picture>
-    <source
-      :srcset="webpSource"
-      type="image/webp">
-    <img
-      :src="source"
-      :alt="img.image_alt"
-      :title="img.caption"
-      class="image">
-  </picture>
+  <div class="image">
+    <picture>
+      <source
+        :srcset="webpSource"
+        type="image/webp">
+      <img
+        :src="source"
+        :alt="img.image_alt"
+        :title="img.caption">
+    </picture>
+    <div
+      data-anim-stripe-from
+      class="image__stripe" />
+    <div
+      data-anim-stripe-to
+      class="image__stripe" />
+  </div>
 </template>
 
 <script>
@@ -40,3 +47,25 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image__stripe {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    width: 100%;
+    height: 100%;
+    background-color: $color-primary;
+    transform: translateX(100%);
+
+    &[data-anim-stripe-to] {
+      background-color: $color-purple;
+    }
+  }
+
+</style>
