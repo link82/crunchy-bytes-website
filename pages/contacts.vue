@@ -6,6 +6,18 @@
       <div
         slot="content"
         class="contacts__content">
+        <div class="contacts__intro">
+          <div
+            v-for="b in story.content.boxes"
+            :key="b.id">
+            <heading
+              size="m"
+              :rich-text="b.title" />
+            <rich-text
+              :content="b.abstract" />
+          </div>
+          <address-box :address="settings.address" />
+        </div>
         <heading
           size="m"
           :rich-text="story.content.title"
@@ -59,31 +71,7 @@
       </div>
       <template v-slot:boxes>
         <side-box light>
-          <address class="contacts__address">
-            Mail:
-            <a
-              :href="`mailto:${settings.address.email}`"
-              target="_blank">
-              {{ settings.address.email }}
-            </a>
-            <div>
-              <div>
-                Indirizzo:
-                <a
-                  href="https://www.google.it/maps/@45.4435806,11.7098501,15z"
-                  target="_blank">
-                  {{ streetAddress }}
-                </a>
-              </div>
-              <div>
-                Telefono:
-                <a
-                  :href="`tel://${settings.address.phone}`">
-                  {{ settings.address.phone }}
-                </a>
-              </div>
-            </div>
-          </address>
+          <address-box :address="settings.address" />
         </side-box>
       </template>
     </page-head>
@@ -97,13 +85,15 @@
   import FormWrapper from '@/components/form/FormWrapper'
   import SideBox from '@/components/SideBox'
   import ValidatedField from '@/components/form/ValidatedField'
+  import AddressBox from '@/components/AddressBox'
 
   export default {
     components: {
       PageHead,
       ValidatedField,
       SideBox,
-      FormWrapper
+      FormWrapper,
+      AddressBox
     },
     mixins: [ BridgeMixin ],
     async asyncData ({ app, error, store }) {
@@ -134,10 +124,7 @@
     computed: {
       ...mapState([
         'settings'
-      ]),
-      streetAddress () {
-        return `${this.settings.address.street}, ${this.settings.address.postal_code} ${this.settings.address.town}`
-      }
+      ])
     },
     methods: {
       ...mapMutations([
@@ -151,7 +138,20 @@
 
 <style lang="scss">
   .contacts__content {
-    width: 60%;
+    @include mq(md) {
+      width: 60%;
+    }
+    @include mq(lg) {
+      color: $color-background;
+    }
+  }
+
+  .contacts__intro {
+    margin-bottom: 50px;
+
+    @include mq(lg) {
+      display: none;
+    }
   }
 
   .contacts__title {
@@ -163,8 +163,13 @@
   }
 
   .contacts__btn {
-    background-color: #fff;
-    color: $color-text;
+    background-color: $color-primary;
+    color: $color-background;
+
+    @include mq(lg) {
+      background-color: $color-background;
+      color: $color-text;
+    }
   }
 
   .contacts__privacy {

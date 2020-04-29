@@ -42,6 +42,16 @@
   .logo {
     fill: $color-dark;
     transition: fill $transition-timing ease;
+
+    @include mq($until: md) {
+      .logo__g {
+        transform: translateY(15px);
+      }
+
+      .logo__t {
+        opacity: 0;
+      }
+    }
   }
 
   .logo--light {

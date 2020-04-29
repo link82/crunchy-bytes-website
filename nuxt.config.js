@@ -37,6 +37,7 @@ export default {
     { src: '~plugins/global-components.js' },
     { src: '~plugins/global-functions.js' },
     { src: '~plugins/json-ld.js' },
+    { src: '~plugins/mq.js', mode: 'client' },
     { src: '~plugins/validation.js' },
     { src: '~plugins/polyfills.js', mode: 'client' },
     { src: '~plugins/what-input.js', mode: 'client' }

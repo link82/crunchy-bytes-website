@@ -1,4 +1,5 @@
 export const state = () => ({
+  currentMQ: null,
   isReady: false,
   isCrawler: false,
   isMenuOpen: false,
@@ -13,6 +14,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  setCurrentMQ (state, value) {
+    state.currentMQ = value
+  },
   setIsReady (state, value) {
     state.isReady = value
   },

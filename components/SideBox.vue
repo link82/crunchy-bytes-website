@@ -1,7 +1,7 @@
 <template>
   <component
     :is="type"
-    :to="link"
+    :to="destination"
     class="quick-link"
     :class="{ 'quick-link--light': light }">
     <slot>
@@ -31,6 +31,9 @@
     computed: {
       type () {
         return !!this.link && !!this.link.id ? 'link-wrapper' : 'div'
+      },
+      destination () {
+        return (Object.keys(this.link).length !== 0 && this.link?.id) ? this.link : null
       },
       titleSize () {
         return this.bigTitle ? 'm' : 's'

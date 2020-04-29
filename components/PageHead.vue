@@ -49,10 +49,6 @@
   .page-head {
     position: relative;
     margin-top: $header-height-mobile;
-    height: calc(100% - #{$header-height-mobile});
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     z-index: 0;
 
     @include mq(lg) {
@@ -64,36 +60,80 @@
     }
   }
 
+  .page-head--home {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: calc(100% - #{$header-height-mobile});
+
+    @include mq(lg) {
+      height: 100%;
+    }
+
+    .page-head__wrapper {
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      flex-direction: row;
+      flex: 1;
+    }
+
+    .page-head__img {
+      margin-bottom: 0;
+    }
+
+    .page-head__content {
+      padding-left: 50px;
+      padding-right: 50px;
+      color: $color-background;
+      order: initial;
+
+      @include mq($until: lg) {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 80%;
+        padding: 20px;
+        background-color: rgba($color-primary, 0.7);
+        transform: translateY(-50%);
+      }
+    }
+
+    .page-head__links {
+      @include mq($until: lg) {
+        display: flex;
+      }
+    }
+  }
+
   .page-head__wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    flex: 1;
+    flex-direction: column;
+
+    @include mq(lg) {
+      width: 100%;
+      height: 100%;
+      flex-direction: row;
+    }
   }
 
   .page-head__content {
-    width: 50%;
-    padding-left: 50px;
-    padding-right: 50px;
-    color: $color-background;
+    padding-left: 35px;
+    padding-right: 35px;
+    order: 2;
 
-    @include mq($until: lg) {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 80%;
-      padding: 20px;
-      background-color: rgba($color-primary, 0.7);
-      transform: translateY(-50%);
+    @include mq(lg) {
+      width: 50%;
+      order: initial;
     }
   }
 
   .page-head__img {
     width: 100%;
     height: 100%;
+    margin-bottom: 40px;
     z-index: -1;
 
     > img {
@@ -113,7 +153,7 @@
   }
 
   .page-head__links {
-    display: flex;
+    display: none;
     justify-content: flex-end;
 
     > * {
@@ -121,6 +161,7 @@
     }
 
     @include mq(lg) {
+      display: flex;
       position: absolute;
       bottom: 0;
       right: 0;
