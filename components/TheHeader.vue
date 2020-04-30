@@ -1,7 +1,6 @@
 <template>
   <header
-    class="header l-container"
-    :class="{ 'header--solid' : headerSolid }">
+    class="header l-container">
     <nuxt-link
       :to="localePath({ name: 'index' })">
       <logo
@@ -10,14 +9,14 @@
         class="header__logo" />
     </nuxt-link>
     <hamburger
-      :light="isMenuOpen"
+      :close="isMenuOpen"
       class="header__burger"
       @click="toggleMenu" />
   </header>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
   import Logo from '@/components/Logo'
   import Hamburger from '@/components/Hamburger'
 
@@ -26,15 +25,33 @@
       Logo,
       Hamburger
     },
+    data () {
+      return {
+        isScrolled: false
+      }
+    },
     computed: {
       ...mapState([
         'isMenuOpen',
         'logoLight',
         'logoSmall',
         'headerSolid'
+      ]),
+      ...mapGetters([
+        'isDesktop'
       ])
     },
+    mounted () {
+      window.addEventListener('scroll', this.handleScroll)
+    },
     methods: {
+      handleScroll () {
+        if (window.scrollY > 90) {
+          this.isScrolled = true
+        } else {
+          this.isScrolled = false
+        }
+      },
       toggleMenu () {
         this.$store.commit('setMenuOpen', !this.isMenuOpen)
       }
@@ -57,10 +74,6 @@
     @include mq($until: lg) {
       height: $header-height-mobile;
     }
-  }
-
-  .header--solid {
-    background-color: $color-green;
   }
 
   .header--light {

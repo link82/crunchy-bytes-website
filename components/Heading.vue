@@ -38,11 +38,13 @@
           default:
             return 'h3'
         }
-      },
-      rich () {
-        if (Object.keys(this.richText).length === 0) { return null }
-
-        return this.$storyapi.richTextResolver.render(this.richText).replace(/^<p[^>]*>|<\/p>$/g, '')
+      }
+    },
+    created () {
+      if (Object.keys(this.richText).length === 0) {
+        this.rich = null
+      } else {
+        this.rich = this.$storyapi.richTextResolver.render(this.richText).replace(/^<p[^>]*>|<\/p>$/g, '')
       }
     }
   }

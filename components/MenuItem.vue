@@ -33,8 +33,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    @include mq(lg) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
   }
 
   .menu-item__label {
@@ -44,7 +49,12 @@
   }
 
   .menu-item__image {
-    width: 150px;
-    height: 150px;
+    width: 90px;
+    height: 90px;
+
+    @include mq(lg) {
+      width: 150px;
+      height: 150px;
+    }
   }
 </style>

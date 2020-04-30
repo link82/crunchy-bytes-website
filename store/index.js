@@ -1,5 +1,6 @@
 export const state = () => ({
   currentMQ: null,
+  cookiesAccepted: false,
   isReady: false,
   isCrawler: false,
   isMenuOpen: false,
@@ -17,6 +18,9 @@ export const state = () => ({
 export const mutations = {
   setCurrentMQ (state, value) {
     state.currentMQ = value
+  },
+  setCookiesAccepted (state, value) {
+    state.cookiesAccepted = value
   },
   setIsReady (state, value) {
     state.isReady = value
@@ -84,4 +88,8 @@ export const actions = {
       console.error(err)
     }
   }
+}
+
+export const getters = {
+  isDesktop: (state) => { return state.currentMQ && (state.currentMQ !== 'xs' && state.currentMQ !== 'sm' && state.currentMQ !== 'md') }
 }

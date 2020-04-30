@@ -2,14 +2,15 @@
   <div class="page contacts">
     <page-head
       :image="story.content.image"
-      :boxes="story.content.boxes">
+      :boxes="story.content.boxes"
+      :color="story.content.color.color">
       <div
         slot="content"
         class="contacts__content">
         <div class="contacts__intro">
           <div
             v-for="b in story.content.boxes"
-            :key="b.id">
+            :key="b._uid">
             <heading
               size="m"
               :rich-text="b.title" />
@@ -97,7 +98,6 @@
     },
     mixins: [ BridgeMixin ],
     async asyncData ({ app, error, store }) {
-      store.commit('setStripeColor', '#00283A')
       try {
         const { data } = await app.$storyapi.get('cdn/stories/contacts', {
           version: store.state.version
@@ -137,11 +137,16 @@
 </script>
 
 <style lang="scss">
+
   .contacts__content {
+    margin-bottom: 60px;
+
     @include mq(md) {
       width: 60%;
+      margin: 0;
     }
     @include mq(lg) {
+
       color: $color-background;
     }
   }

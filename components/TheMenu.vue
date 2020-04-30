@@ -188,13 +188,39 @@
   }
 
   .menu__content {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
     height: 100%;
-    padding: 100px;
-    background-color: $color-primary;
+    padding: 60px;
+    padding-right: calc(30% - 45px);
+    background-color: rgba($color-primary, 0.8);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30%;
+      height: 100%;
+      background-color: $color-background;
+    }
+
+    @include mq(lg) {
+      padding: 100px;
+      padding-right: calc(300px - 45px);
+      background-color: rgba($color-primary, 0.95);
+
+      &::after {
+        width: 300px;
+      }
+    }
+  }
+
+  .menu__list {
+    z-index: 1;
   }
 
   .menu__swipe {

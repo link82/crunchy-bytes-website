@@ -1,12 +1,14 @@
 <template>
   <main class="main-content">
     <the-header />
+    <div class="header-spacer" />
     <nuxt />
     <the-menu v-show="isMenuOpen" />
     <the-stripe
       :color="stripeColor"
       :small="stripeSmall"
       :right="stripeRight" />
+    <cookie-bar v-if="!cookiesAccepted" />
     <the-footer />
   </main>
 </template>
@@ -17,12 +19,14 @@
   import TheFooter from '@/components/TheFooter'
   import TheMenu from '@/components/TheMenu'
   import TheStripe from '@/components/TheStripe'
+  import CookieBar from '@/components/CookieBar'
 
   export default {
     components: {
       TheMenu,
       TheStripe,
       TheHeader,
+      CookieBar,
       TheFooter
     },
     computed: {
@@ -30,8 +34,21 @@
         'isMenuOpen',
         'stripeSmall',
         'stripeRight',
-        'stripeColor'
+        'stripeColor',
+        'cookiesAccepted'
       ])
     }
   }
 </script>
+
+<style lang="scss">
+  .header-spacer {
+    width: 100%;
+    height: $header-height-mobile;
+    background-color: $color-primary;
+
+    @include mq(lg) {
+      display: none;
+    }
+  }
+</style>

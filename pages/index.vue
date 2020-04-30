@@ -1,9 +1,11 @@
 <template>
   <div class="page page-home">
+    <div class="page__headerspacer" />
     <page-head
       home
       :image="story.content.image"
-      :boxes="story.content.boxes">
+      :boxes="story.content.boxes"
+      :color="story.content.color.color">
       <template v-slot:content>
         <heading
           size="xl"
@@ -33,7 +35,6 @@
     },
     mixins: [ BridgeMixin ],
     async asyncData ({ app, error, store }) {
-      store.commit('setStripeColor', '#1A788C')
       try {
         const { data } = await app.$storyapi.get('cdn/stories/index', {
           version: store.state.version

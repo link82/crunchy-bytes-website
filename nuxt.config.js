@@ -38,6 +38,7 @@ export default {
     { src: '~plugins/global-functions.js' },
     { src: '~plugins/json-ld.js' },
     { src: '~plugins/mq.js', mode: 'client' },
+    { src: '~plugins/check-cookies.js' },
     { src: '~plugins/validation.js' },
     { src: '~plugins/polyfills.js', mode: 'client' },
     { src: '~plugins/what-input.js', mode: 'client' }
@@ -47,6 +48,7 @@ export default {
   ],
   modules: [
     '@nuxtjs/style-resources',
+    'cookie-universal-nuxt',
     [ 'storyblok-nuxt', {
       accessToken: 'tL4pD9Wn6Qya9GZM6rB87gtt',
       cacheProvider: 'memory'
