@@ -1,25 +1,31 @@
 <template>
   <div class="page page-home">
-    <div class="page__headerspacer" />
-    <page-head
-      home
-      :image="story.content.image"
-      :boxes="story.content.boxes"
-      :color="story.content.color.color">
-      <template v-slot:content>
-        <heading
-          size="xl"
-          :rich-text="story.content.title" />
-        <rich-text
-          :content="story.content.abstract"
-          class="page__abstract" />
-      </template>
-    </page-head>
-    <dynamic-component
-      v-for="(block, i) in story.content.blocks"
-      :key="block._uid"
-      :index="i"
-      :block="block" />
+    <full-page
+      id="fullpage"
+      ref="fullpage"
+      :options="fullpageOpts">
+      <page-head
+        home
+        :image="story.content.image"
+        :boxes="story.content.boxes"
+        :color="story.content.color.color"
+        data-fp-section>
+        <template v-slot:content>
+          <heading
+            size="xl"
+            :rich-text="story.content.title" />
+          <rich-text
+            :content="story.content.abstract"
+            class="page__abstract" />
+        </template>
+      </page-head>
+      <dynamic-component
+        v-for="(block, i) in story.content.blocks"
+        :key="block._uid"
+        :index="i"
+        :block="block"
+        data-fp-section />
+    </full-page>
   </div>
 </template>
 
@@ -39,7 +45,14 @@
         const { data } = await app.$storyapi.get('cdn/stories/index', {
           version: store.state.version
         })
-        return data
+        return {
+          ...data,
+          fullpageOpts: {
+            licenseKey: 'lol',
+            sectionSelector: '[data-fp-section]',
+            slideSelector: '[data-fp-slide]'
+          }
+        }
       } catch (err) {
         if (!err.response) {
           console.error(err)
@@ -49,6 +62,11 @@
           error({ statusCode: err.response.status, message: err.response.data })
         }
       }
+    },
+    mounted () {
+      this.$root.$on('fp:update', () => {
+        this.$refs.fullpage.build()
+      })
     }
   }
 </script>

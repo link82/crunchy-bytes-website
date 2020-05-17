@@ -40,6 +40,7 @@ export default {
     { src: '~plugins/mq.js', mode: 'client' },
     { src: '~plugins/check-cookies.js' },
     { src: '~plugins/validation.js' },
+    { src: '~plugins/fullpage.js', mode: 'client' },
     { src: '~plugins/polyfills.js', mode: 'client' },
     { src: '~plugins/what-input.js', mode: 'client' }
   ],
