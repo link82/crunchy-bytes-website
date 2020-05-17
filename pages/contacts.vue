@@ -80,6 +80,7 @@
 </template>
 
 <script>
+  import gsap from 'gsap'
   import { mapMutations, mapState } from 'vuex'
   import BridgeMixin from '@/mixins/storybridge'
   import PageHead from '@/components/PageHead'
@@ -97,6 +98,46 @@
       AddressBox
     },
     mixins: [ BridgeMixin ],
+    transition: {
+      mode: 'out-in',
+      enter (el, done) {
+        el.querySelector('.page-head__img [data-anim-stripe-from]').classList.add('image__stripe--half')
+
+        gsap
+          .timeline()
+          .set(el.querySelector('.page-head'), {
+            overflow: 'hidden'
+          })
+          .to(document.querySelector('.stripe'), 0.35, {
+            scaleX: 1
+          })
+          .set(document.querySelector('.stripe'), {
+            clearProps: 'transition, transform-origin, transform'
+          })
+          .to(el.querySelector('.page-head__img [data-anim-stripe-from]'), 0.35, {
+            x: '-100%'
+          })
+          .to(el.querySelector('.page-head__img [data-anim-stripe-to]'), 1, {
+            x: '-100%'
+          }, '-=0.5')
+          .from('.page-head__content', 0.5, {
+            x: -20,
+            opacity: 0
+          })
+          .from(el.querySelector('.page-head__links'), 0.5, {
+            y: '100%',
+            opacity: 0
+          })
+          .add(() => {
+            el.querySelector('.page-head__img [data-anim-stripe-from]').classList.remove('image__stripe--half')
+            done()
+          })
+      },
+      leave (el, done) {
+        console.log('leave_contacts')
+        done()
+      }
+    },
     async asyncData ({ app, error, store }) {
       try {
         const { data } = await app.$storyapi.get('cdn/stories/contacts', {
