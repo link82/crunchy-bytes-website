@@ -62,7 +62,7 @@
     position: absolute;
     top: 0;
     right: -1px;
-    width: 100%;
+    width: calc(100% + 1px);
     height: 100%;
     background-color: $color-primary;
     transform: translateX(100%);

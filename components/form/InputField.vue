@@ -100,14 +100,14 @@
   .input-field--focused,
   .input-field--dirty {
     .input-field__label {
-      transform: translateY(-100%) scale(0.9);
+      transform: translateY(calc(100% + 12px)) scale(0.9);
       opacity: 1;
     }
   }
 
   // chrome only
   .input-field__field:-webkit-autofill + .input-field__label {
-    transform: translateY(-100%) scale(0.9);
+    transform: translateY(calc(100% + 12px)) scale(0.9);
     opacity: 1;
   }
 
@@ -121,7 +121,7 @@
 
   .input-field__label {
     position: absolute;
-    top: 0;
+    bottom: 10px;
     left: 0;
     width: 100%;
     line-height: 1.2;

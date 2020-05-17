@@ -82,14 +82,14 @@
   .textarea-field--focused,
   .textarea-field--dirty {
     .textarea-field__label {
-      transform: translateY(-100%) scale(0.9);
+      transform: translateY(calc(100% + 12px)) scale(0.9);
       opacity: 1;
     }
   }
 
   // chrome only
   .textarea-field__field:-webkit-autofill + .textarea-field__label {
-    transform: translateY(-100%) scale(0.9);
+    transform: translateY(calc(100% + 12px)) scale(0.9);
     opacity: 1;
   }
 
@@ -103,7 +103,7 @@
 
   .textarea-field__label {
     position: absolute;
-    top: 0;
+    bottom: 10px;
     left: 0;
     width: 100%;
     white-space: nowrap;
