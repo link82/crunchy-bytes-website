@@ -31,6 +31,7 @@
 </template>
 
 <script>
+  import gsap from 'gsap'
   import BridgeMixin from '@/mixins/storybridge'
   import DynamicComponent from '@/components/DynamicComponent'
   import PageHead from '@/components/PageHead'
@@ -40,6 +41,84 @@
       DynamicComponent,
       PageHead
     },
+    transition: {
+      css: false,
+      mode: 'out-in',
+      enter (el, done) {
+        console.log('enter')
+        el.querySelector('.page-head__img [data-anim-stripe-from]').classList.add('image__stripe--half')
+
+        gsap
+          .timeline()
+          .to(document.querySelector('.stripe'), 0.35, {
+            backgroundColor: this.$store.state.stripeColor
+          })
+          .to(document.querySelector('.stripe'), 0.35, {
+            scaleX: 1
+          })
+          .set(document.querySelector('.stripe'), {
+            clearProps: 'transform, transform-origin, transition'
+          })
+          .to(el.querySelector('.page-head__img [data-anim-stripe-from]'), 0.35, {
+            x: '-100%'
+          })
+          .to(el.querySelector('.page-head__img [data-anim-stripe-to]'), 1, {
+            x: '-100%'
+          }, '-=0.5')
+          .from('.page-head__content', 0.5, {
+            x: -20,
+            opacity: 0
+          })
+          .from(el.querySelector('.socials'), 0.35, {
+            x: -20,
+            opacity: 0
+          })
+          .set(el.querySelector('.page-head'), {
+            overflow: 'hidden'
+          })
+          .from(el.querySelector('.page-head__links'), 0.5, {
+            y: '100%',
+            opacity: 0
+          })
+          .add(() => {
+            el.querySelector('.page-head__img [data-anim-stripe-from]').classList.remove('image__stripe--half')
+            done()
+          })
+      },
+      leave (el, done) {
+        console.log('leave')
+
+        gsap
+          .timeline()
+          .to(el.querySelector('.page-head__links'), 0.5, {
+            y: '100%',
+            opacity: 0
+          })
+          .to(el.querySelector('.socials'), 0.35, {
+            x: -20,
+            opacity: 0
+          })
+          .to(el.querySelector('.page__title'), 0.45, {
+            x: -20,
+            opacity: 0
+          })
+          .to(el.querySelector('.page__abstract'), 0.45, {
+            x: -20,
+            opacity: 0
+          }, '-=0.3')
+          .to(el.querySelector('.page-head__img [data-anim-stripe-from]'), 0.35, {
+            x: 0
+          })
+          .set(document.querySelector('.stripe'), {
+            transformOrigin: 'left',
+            transition: 'background-color 350ms'
+          })
+          .to(document.querySelector('.stripe'), 0.35, {
+            scaleX: 2
+          })
+          .add(done)
+      }
+    },
     mixins: [ BridgeMixin ],
     async asyncData ({ app, error, store }) {
       try {
@@ -47,22 +126,7 @@
           version: store.state.version
         })
         return {
-          ...data,
-          fullpageOpts: {
-            licenseKey: 'lol',
-            sectionSelector: '[data-fp-section]',
-            slideSelector: '[data-fp-slide]',
-            onLeave: (origin, destination, direction) => {
-              console.log(destination.index)
-              if (destination.index == 0) {
-                store.commit('setStripeColor', data.story.content.color.color)
-                store.commit('setStripeSmall', false)
-              } else {
-                store.commit('setStripeColor', '#ffcc00')
-                store.commit('setStripeSmall', true)
-              }
-            }
-          }
+          ...data
         }
       } catch (err) {
         if (!err.response) {
@@ -71,6 +135,16 @@
         } else {
           console.error(err.response.data)
           error({ statusCode: err.response.status, message: err.response.data })
+        }
+      }
+    },
+    data () {
+      return {
+        fullpageOpts: {
+          licenseKey: 'lol',
+          sectionSelector: '[data-fp-section]',
+          slideSelector: '[data-fp-slide]',
+          onLeave: this.handleScroll
         }
       }
     },
@@ -87,6 +161,16 @@
       this.$root.$off('menu:close')
     },
     methods: {
+      handleScroll (origin, destination, direction) {
+        console.log(destination.index)
+        if (destination.index == 0) {
+          this.$store.commit('setStripeColor', this.story.content.color.color)
+          this.$store.commit('setStripeSmall', false)
+        } else {
+          this.$store.commit('setStripeColor', '#ffcc00')
+          this.$store.commit('setStripeSmall', true)
+        }
+      },
       disableScroll () {
         this.$refs.fullpage.api.setAllowScrolling(false)
         this.$refs.fullpage.api.setKeyboardScrolling(false)
@@ -100,6 +184,10 @@
 </script>
 
 <style lang="scss">
+  .page__title {
+    margin-bottom: 20px;
+  }
+
   .page__abstract {
     width: 60%;
 
