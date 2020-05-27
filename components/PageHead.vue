@@ -40,20 +40,7 @@
     props: {
       image: VueTypes.object,
       boxes: VueTypes.array,
-      home: VueTypes.bool.def(false),
-      color: VueTypes.string
-    },
-    mounted () {
-      this.observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          this.$store.commit('setStripeColor', this.color)
-          this.$store.commit('setStripeSmall', false)
-        }
-      }, { rootMargin: '-60% 0px -40% 0px' })
-      this.observer.observe(this.$el)
-    },
-    beforeDestroy () {
-      this.observer.disconnect()
+      home: VueTypes.bool.def(false)
     }
   }
 </script>

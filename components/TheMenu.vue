@@ -7,7 +7,7 @@
     @after-enter="cleanup"
     @before-leave="beforeLeave"
     @leave="handleLeave"
-    @after-leave="cleanup"
+    @after-leave="cleanupLeave"
     @enter-cancelled="cancel"
     @leave-cancelled="cancel">
     <aside class="menu">
@@ -61,6 +61,7 @@
     },
     methods: {
       beforeEnter (el) {
+        this.$root.$emit('menu:open')
         if (!this.timeline) {
           const s = el.querySelector('[data-anim-color]')
           const c = el.querySelector('[data-anim-content]')
@@ -170,6 +171,10 @@
         gsap.set([ s, c, i, ss ], {
           clearProps: 'all'
         })
+      },
+      cleanupLeave (el) {
+        this.$root.$emit('menu:close')
+        this.cleanup(el)
       },
       cancel () {
         this.timeline.pause()

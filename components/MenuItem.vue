@@ -22,8 +22,6 @@
       to: VueTypes.object.isRequired,
       image: VueTypes.string,
       label: VueTypes.string
-    },
-    methods: {
     }
   }
 </script>

@@ -1,7 +1,6 @@
 <template>
   <main class="main-content">
     <the-header />
-    <div class="header-spacer" />
     <nuxt />
     <the-menu v-show="isMenuOpen" />
     <the-stripe
@@ -40,15 +39,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .header-spacer {
-    width: 100%;
-    height: $header-height-mobile;
-    background-color: $color-primary;
-
-    @include mq(lg) {
-      display: none;
-    }
-  }
-</style>

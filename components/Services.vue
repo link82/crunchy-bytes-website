@@ -76,21 +76,8 @@
         return `background-color: ${this.currentActiveItem.color.color};`
       }
     },
-    mounted () {
-      // this.observer = new IntersectionObserver((entries) => {
-      //   if (entries[0].isIntersecting) {
-      //     this.$store.commit('setStripeColor', this.currentActiveItem.color.color)
-      //     this.$store.commit('setStripeSmall', true)
-      //   }
-      // }, { rootMargin: '-60% 0px -40% 0px' })
-      // this.observer.observe(this.$el)
-    },
-    beforeDestroy () {
-      // this.observer.disconnect()
-    },
     methods: {
       change () {
-        this.$store.commit('setStripeSmall', true)
         if (this.currentActive === this.items.length - 1) {
           this.currentActive = 0
         } else {
