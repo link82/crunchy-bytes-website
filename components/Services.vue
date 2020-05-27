@@ -10,11 +10,11 @@
         :key="currentActive"
         class="services__item services__item--r">
         <div class="services__img">
-          <template v-for="item in items">
+          <template v-for="(item, i) in items">
             <n-image
-              v-show="isActive(item)"
+              v-show="isActive(i)"
               :key="item._uid"
-              :data-anim-image="isActive(item)"
+              :data-anim-image="isActive(i)"
               :img="item.image" />
           </template>
         </div>
@@ -22,11 +22,11 @@
           data-anim-content
           :style="currentActiveColor"
           class="services__content">
-          <template v-for="item in items">
+          <template v-for="(item, i) in items">
             <div
-              v-show="isActive(item)"
+              v-show="isActive(i)"
               :key="item._uid"
-              :data-anim-text="isActive(item)"
+              :data-anim-text="isActive(i)"
               class="services__text">
               <heading
                 size="l"
@@ -61,46 +61,42 @@
     },
     data () {
       return {
-        currentActive: null
+        currentActive: 0
       }
     },
     computed: {
+      ...mapGetters([
+        'isDesktop'
+      ]),
       currentActiveItem () {
-        return this.items.find(i => i._uid === this.currentActive)
+        return this.items[this.currentActive]
       },
       currentActiveColor () {
         if (this.isDesktop) { return null }
         return `background-color: ${this.currentActiveItem.color.color};`
-      },
-      ...mapGetters([
-        'isDesktop'
-      ])
-    },
-    created () {
-      this.currentActive = this.items[0]._uid
+      }
     },
     mounted () {
-      this.observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          this.$store.commit('setStripeColor', this.currentActiveItem.color.color)
-          this.$store.commit('setStripeSmall', true)
-        }
-      }, { rootMargin: '-60% 0px -40% 0px' })
-      this.observer.observe(this.$el)
+      // this.observer = new IntersectionObserver((entries) => {
+      //   if (entries[0].isIntersecting) {
+      //     this.$store.commit('setStripeColor', this.currentActiveItem.color.color)
+      //     this.$store.commit('setStripeSmall', true)
+      //   }
+      // }, { rootMargin: '-60% 0px -40% 0px' })
+      // this.observer.observe(this.$el)
     },
     beforeDestroy () {
-      this.observer.disconnect()
+      // this.observer.disconnect()
     },
     methods: {
       change () {
         this.$store.commit('setStripeSmall', true)
-        if (this.currentActive === this.items[0]._uid) {
-          this.currentActive = this.items[1]._uid
-          this.$store.commit('setStripeColor', this.items[1].color.color)
+        if (this.currentActive === this.items.length - 1) {
+          this.currentActive = 0
         } else {
-          this.currentActive = this.items[0]._uid
-          this.$store.commit('setStripeColor', this.items[0].color.color)
+          this.currentActive = this.currentActive + 1
         }
+        this.$store.commit('setStripeColor', this.currentActiveItem.color.color)
       },
       beforeEnter (el) {
         const img = el.querySelector('[data-anim-image]')
@@ -173,8 +169,8 @@
         })
           .add(done)
       },
-      isActive (item) {
-        return this.currentActive === item._uid
+      isActive (index) {
+        return this.currentActive === index
       },
       bgColor (item) {
         if (!item.color?.color) { return null }
